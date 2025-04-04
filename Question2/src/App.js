@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, NavLink } from 'react-router-dom';
 import './App.css';
 
 // Import pages
@@ -10,31 +10,36 @@ import Feed from './pages/Feed';
 function App() {
   return (
     <Router>
-      <div className="container">
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
-          <div className="container-fluid">
-            <span className="navbar-brand">Social Media Analytics</span>
-            <div className="collapse navbar-collapse">
-              <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+      <div className="App">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div className="container">
+            <Link className="navbar-brand" to="/">Social Media Analytics</Link>
+            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse" id="navbarNav">
+              <ul className="navbar-nav ms-auto">
                 <li className="nav-item">
-                  <Link to="/" className="nav-link">Top Users</Link>
+                  <NavLink className={({isActive}) => "nav-link" + (isActive ? " active" : "")} to="/">Top Users</NavLink>
                 </li>
                 <li className="nav-item">
-                  <Link to="/trending" className="nav-link">Trending Posts</Link>
+                  <NavLink className={({isActive}) => "nav-link" + (isActive ? " active" : "")} to="/trending">Trending Posts</NavLink>
                 </li>
                 <li className="nav-item">
-                  <Link to="/feed" className="nav-link">Feed</Link>
+                  <NavLink className={({isActive}) => "nav-link" + (isActive ? " active" : "")} to="/feed">Feed</NavLink>
                 </li>
               </ul>
             </div>
           </div>
         </nav>
 
-        <Routes>
-          <Route path="/" element={<TopUsers />} />
-          <Route path="/trending" element={<TrendingPosts />} />
-          <Route path="/feed" element={<Feed />} />
-        </Routes>
+        <div className="app-container">
+          <Routes>
+            <Route path="/" element={<TopUsers />} />
+            <Route path="/trending" element={<TrendingPosts />} />
+            <Route path="/feed" element={<Feed />} />
+          </Routes>
+        </div>
       </div>
     </Router>
   );
